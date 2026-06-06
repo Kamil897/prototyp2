@@ -1,0 +1,178 @@
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+const seedData = [
+  {
+    nameRu: 'Доска обрезная', nameUz: 'Kesilgan taxta', nameEn: 'Sawn board',
+    size: '25×150×6000', cat: 'board', cls: 'g1',
+    img: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?w=600&q=75',
+    tagsRu: '["Сосна","1–4 сорт"]', tagsUz: '["Qarag\'ay","1–4 sort"]', tagsEn: '["Pine","Grade 1–4"]',
+    descRu: 'Обрезная доска из сибирской сосны. Ровный пил, минимальный обзол.',
+    descUz: "Sibirdan qarag'ay taxta. Toza kesilgan, minimal cheti.",
+    descEn: 'Sawn pine board from Siberia. Clean cut, minimal wane.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"1–4","Упаковка":"Пакет 6 м"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"1–4","Qadoq":"Paket 6 m"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"1–4","Pack":"Bundle 6 m"}',
+    position: 1,
+  },
+  {
+    nameRu: 'Доска обрезная', nameUz: 'Kesilgan taxta', nameEn: 'Sawn board',
+    size: '32×150×6000', cat: 'board', cls: 'g2',
+    img: 'https://images.unsplash.com/photo-1603796846097-bee99e4a601f?w=600&q=75',
+    tagsRu: '["Сосна","1–3 сорт"]', tagsUz: '["Qarag\'ay","1–3 sort"]', tagsEn: '["Pine","Grade 1–3"]',
+    descRu: 'Универсальная доска 32 мм для полов, перегородок и кровельных конструкций.',
+    descUz: '32 mm taxta pol, devor va tom uchun.',
+    descEn: '32mm versatile board for floors, partitions and roof structures.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"1–3","Упаковка":"Пакет 6 м"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"1–3","Qadoq":"Paket 6 m"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"1–3","Pack":"Bundle 6 m"}',
+    position: 2,
+  },
+  {
+    nameRu: 'Доска обрезная', nameUz: 'Kesilgan taxta', nameEn: 'Sawn board',
+    size: '40×150×6000', cat: 'board', cls: 'g1',
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75',
+    tagsRu: '["Сосна","2 сорт"]', tagsUz: '["Qarag\'ay","2 sort"]', tagsEn: '["Pine","Grade 2"]',
+    descRu: 'Доска 40 мм повышенной толщины. Идеально для половой доски и несущих конструкций.',
+    descUz: '40 mm qalinlikdagi taxta. Pol va tashuvchi konstruktsiyalar uchun ideal.',
+    descEn: '40mm thick board. Ideal for flooring and load-bearing structures.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"2","Упаковка":"Пакет 6 м"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"2","Qadoq":"Paket 6 m"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"2","Pack":"Bundle 6 m"}',
+    position: 3,
+  },
+  {
+    nameRu: 'Доска обрезная', nameUz: 'Kesilgan taxta', nameEn: 'Sawn board',
+    size: '50×150×6000', cat: 'board', cls: 'g2',
+    img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75',
+    tagsRu: '["Сосна","1–4 сорт"]', tagsUz: '["Qarag\'ay","1–4 sort"]', tagsEn: '["Pine","Grade 1–4"]',
+    descRu: 'Толстая обрезная доска 50 мм. Используется в несущих конструкциях и тяжёлой опалубке.',
+    descUz: '50 mm qalin taxta. Tashuvchi konstruktsiyalar va qolip uchun.',
+    descEn: '50mm heavy sawn board. Used in load-bearing structures and heavy formwork.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"1–4","Упаковка":"Пакет 6 м"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"1–4","Qadoq":"Paket 6 m"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"1–4","Pack":"Bundle 6 m"}',
+    position: 4,
+  },
+  {
+    nameRu: 'Брус строительный', nameUz: 'Qurilish brusi', nameEn: 'Timber beam',
+    size: '100×100×6000', cat: 'beam', cls: 'g3',
+    img: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&q=75',
+    tagsRu: '["Сосна","2 сорт"]', tagsUz: '["Qarag\'ay","2 sort"]', tagsEn: '["Pine","Grade 2"]',
+    descRu: 'Строительный брус 100×100 — стандарт каркасного строительства.',
+    descUz: '100×100 qurilish brusi — kadrli qurilishning standarti.',
+    descEn: '100×100 structural timber — the standard for framing.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"2","Профиль":"Квадратный"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"2","Profil":"Kvadrat"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"2","Profile":"Square"}',
+    position: 5,
+  },
+  {
+    nameRu: 'Брус строительный', nameUz: 'Qurilish brusi', nameEn: 'Timber beam',
+    size: '100×150×6000', cat: 'beam', cls: 'g4',
+    img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=75',
+    tagsRu: '["Сосна","2 сорт"]', tagsUz: '["Qarag\'ay","2 sort"]', tagsEn: '["Pine","Grade 2"]',
+    descRu: 'Прямоугольный брус 100×150. Применяется для мауэрлата и балок перекрытий.',
+    descUz: "100×150 to'rtburchak brus. Tom va qoplama elementlari uchun.",
+    descEn: '100×150 rectangular beam. Used as wall plate and floor beams.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"2","Профиль":"Прямоугольный"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"2","Profil":"To\'rtburchak"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"2","Profile":"Rectangular"}',
+    position: 6,
+  },
+  {
+    nameRu: 'Брус строительный', nameUz: 'Qurilish brusi', nameEn: 'Timber beam',
+    size: '150×150×6000', cat: 'beam', cls: 'g3',
+    img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=600&q=75',
+    tagsRu: '["Сосна","2 сорт"]', tagsUz: '["Qarag\'ay","2 sort"]', tagsEn: '["Pine","Grade 2"]',
+    descRu: 'Мощный брус 150×150 для капитального строительства.',
+    descUz: "150×150 quvvatli brus. Kapital qurilish uchun.",
+    descEn: 'Heavy 150×150 beam for capital construction.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"2","Профиль":"Квадратный"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"2","Profil":"Kvadrat"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"2","Profile":"Square"}',
+    position: 7,
+  },
+  {
+    nameRu: 'Брус строительный', nameUz: 'Qurilish brusi', nameEn: 'Timber beam',
+    size: '200×200×6000', cat: 'beam', cls: 'g4',
+    img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=75',
+    tagsRu: '["Сосна","2 сорт"]', tagsUz: '["Qarag\'ay","2 sort"]', tagsEn: '["Pine","Grade 2"]',
+    descRu: 'Крупногабаритный брус 200×200 для промышленного строительства.',
+    descUz: "200×200 yirik o'lchamli brus. Sanoat qurilish uchun.",
+    descEn: '200×200 large-scale beam for industrial construction.',
+    specsRu: '{"Порода":"Сосна","Сушка":"Атмосферная","Сорт":"2","Профиль":"Квадратный"}',
+    specsUz: '{"Tur":"Qarag\'ay","Quritish":"Atmosfera","Sort":"2","Profil":"Kvadrat"}',
+    specsEn: '{"Species":"Pine","Drying":"Air-dried","Grade":"2","Profile":"Square"}',
+    position: 8,
+  },
+  {
+    nameRu: 'Рейка', nameUz: 'Reyka', nameEn: 'Batten',
+    size: '38×44', cat: 'batten', cls: 'g5',
+    img: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=600&q=75',
+    tagsRu: '["Сосна","Ель"]', tagsUz: '["Qarag\'ay","Archa"]', tagsEn: '["Pine","Spruce"]',
+    descRu: 'Рейка стандартного сечения для обрешётки кровли и отделочных работ.',
+    descUz: "Tom yopish va issiqlik izolyatsiyasi uchun standart reyka.",
+    descEn: 'Standard section batten for roofing and finishing works.',
+    specsRu: '{"Порода":"Сосна / Ель","Сушка":"Атмосферная","Сорт":"2–3","Применение":"Обрешётка"}',
+    specsUz: '{"Tur":"Qarag\'ay / Archa","Quritish":"Atmosfera","Sort":"2–3","Ishlatish":"Tom panjari"}',
+    specsEn: '{"Species":"Pine / Spruce","Drying":"Air-dried","Grade":"2–3","Use":"Roofing"}',
+    position: 9,
+  },
+  {
+    nameRu: 'Рейка строганая', nameUz: 'Tekis reyka', nameEn: 'Planed batten',
+    size: '38×140×4000', cat: 'batten', cls: 'g6',
+    img: 'https://images.unsplash.com/photo-1601662528567-526cd06f6582?w=600&q=75',
+    tagsRu: '["Ель","1 сорт"]', tagsUz: '["Archa","1 sort"]', tagsEn: '["Spruce","Grade 1"]',
+    descRu: 'Строганая рейка из ели первого сорта. Гладкая поверхность, точные размеры.',
+    descUz: "Birinchi sort archa reykasi. Silliq sirt, aniq o'lchamlar.",
+    descEn: 'Grade 1 planed spruce batten. Smooth surface, precise dimensions.',
+    specsRu: '{"Порода":"Ель","Обработка":"Строганая","Сорт":"1","Влажность":"18–20%"}',
+    specsUz: '{"Tur":"Archa","Qayta":"Tekislangan","Sort":"1","Namlik":"18–20%"}',
+    specsEn: '{"Species":"Spruce","Finish":"Planed","Grade":"1","Moisture":"18–20%"}',
+    position: 10,
+  },
+  {
+    nameRu: 'Вагонка сосна', nameUz: "Vagonka qarag'ay", nameEn: 'Pine cladding',
+    size: '12×96×3000', cat: 'finishing', cls: 'g5',
+    img: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=75',
+    tagsRu: '["Сосна","Сорт А"]', tagsUz: '["Qarag\'ay","A sort"]', tagsEn: '["Pine","Grade A"]',
+    descRu: 'Деревянная вагонка из сосны для внутренней отделки стен и потолков.',
+    descUz: "Ichki bezak uchun qarag'ay vagonka. A sort — sifatli yuza.",
+    descEn: 'Pine tongue-and-groove cladding for interior walls and ceilings.',
+    specsRu: '{"Порода":"Сосна","Обработка":"Строганая","Сорт":"А","Профиль":"Вагонка"}',
+    specsUz: '{"Tur":"Qarag\'ay","Qayta":"Tekislangan","Sort":"A","Profil":"Vagonka"}',
+    specsEn: '{"Species":"Pine","Finish":"Planed","Grade":"A","Profile":"T&G"}',
+    position: 11,
+  },
+  {
+    nameRu: 'Половая доска', nameUz: 'Pol taxtasi', nameEn: 'Flooring board',
+    size: '28×120×3000', cat: 'finishing', cls: 'g6',
+    img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=75',
+    tagsRu: '["Сосна","Строганая"]', tagsUz: '["Qarag\'ay","Tekislangan"]', tagsEn: '["Pine","Planed"]',
+    descRu: 'Шпунтованная половая доска из сосны. Система шип-паз для плотного соединения.',
+    descUz: "Qarag'ay pol taxtasi. Pazli tizim mahkam ulanishni ta'minlaydi.",
+    descEn: 'Tongue-and-groove pine flooring board. T&G system ensures tight joints.',
+    specsRu: '{"Порода":"Сосна","Обработка":"Строганая","Профиль":"Шпунт","Влажность":"≤18%"}',
+    specsUz: '{"Tur":"Qarag\'ay","Qayta":"Tekislangan","Profil":"Paz","Namlik":"≤18%"}',
+    specsEn: '{"Species":"Pine","Finish":"Planed","Profile":"T&G","Moisture":"≤18%"}',
+    position: 12,
+  },
+];
+
+async function main() {
+  const count = await prisma.product.count();
+  if (count > 0) {
+    console.log(`DB already has ${count} products, skipping seed.`);
+    return;
+  }
+  for (const p of seedData) {
+    await prisma.product.create({ data: p });
+  }
+  console.log(`✅ Seeded ${seedData.length} products`);
+}
+
+main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());

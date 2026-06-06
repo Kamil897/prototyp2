@@ -7,13 +7,19 @@ import { HomePage } from './pages/HomePage';
 import { CatalogPage } from './pages/CatalogPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { AdminPage } from './pages/AdminPage';
 import { useProducts } from './hooks/useProducts';
+
+// Secret admin route: /#admin
+const isAdmin = window.location.hash === '#admin';
 
 export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const [preselected, setPreselected] = useState('');
   const { products, loading } = useProducts();
+
+  if (isAdmin) return <AdminPage />;
 
   const navigate = (p: Page) => setPage(p);
 
@@ -36,32 +42,22 @@ export default function App() {
 
       {loading ? (
         <div className="loading-state">
-          <i className="ti ti-loader" style={{ animation: 'spin 1s linear infinite' }} />
+          <i className="ti ti-loader" />
           Загрузка...
         </div>
       ) : (
         <>
-          {page === 'home' && (
-            <HomePage products={products} onNavigate={navigate} onProductClick={openProduct} />
-          )}
-          {page === 'catalog' && (
-            <CatalogPage products={products} onProductClick={openProduct} preselectedProduct={preselected} />
-          )}
+          {page === 'home' && <HomePage products={products} onNavigate={navigate} onProductClick={openProduct} />}
+          {page === 'catalog' && <CatalogPage products={products} onProductClick={openProduct} preselectedProduct={preselected} />}
           {page === 'about' && <AboutPage />}
-          {page === 'contact' && (
-            <ContactPage products={products} preselectedProduct={preselected} />
-          )}
+          {page === 'contact' && <ContactPage products={products} preselectedProduct={preselected} />}
         </>
       )}
 
       <Footer onNavigate={navigate} />
 
       {modalProduct && (
-        <ProductModal
-          product={modalProduct}
-          onClose={() => setModalProduct(null)}
-          onOrder={orderFromModal}
-        />
+        <ProductModal product={modalProduct} onClose={() => setModalProduct(null)} onOrder={orderFromModal} />
       )}
     </>
   );

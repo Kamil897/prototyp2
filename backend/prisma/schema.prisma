@@ -17,3 +17,28 @@ model Order {
   status    String   @default("new")
   createdAt DateTime @default(now())
 }
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  nameRu    String
+  nameUz    String
+  nameEn    String
+  size      String
+  cat       String
+  cls       String   @default("g1")
+  img       String   @default("")
+  tagsRu    String   @default("[]")
+  tagsUz    String   @default("[]")
+  tagsEn    String   @default("[]")
+  descRu    String   @default("")
+  descUz    String   @default("")
+  descEn    String   @default("")
+  specsRu   String   @default("{}")
+  specsUz   String   @default("{}")
+  specsEn   String   @default("{}")
+  price     String   @default("")
+  active    Boolean  @default(true)
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
