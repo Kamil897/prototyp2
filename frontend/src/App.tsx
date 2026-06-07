@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Page, Product } from './types';
 import { Topbar } from './components/Topbar';
 import { Footer } from './components/Footer';
@@ -10,18 +10,23 @@ import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 import { useProducts } from './hooks/useProducts';
 
-// Secret admin route: /#admin
-const isAdmin = window.location.hash === '#admin';
-
 export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const [preselected, setPreselected] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const { products, loading } = useProducts();
+
+  useEffect(() => {
+    const check = () => setIsAdmin(window.location.hash === '#admin');
+    check();
+    window.addEventListener('hashchange', check);
+    return () => window.removeEventListener('hashchange', check);
+  }, []);
 
   if (isAdmin) return <AdminPage />;
 
-  const navigate = (p: Page) => setPage(p);
+  const navigate = (p: Page) => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   const openProduct = (id: number) => {
     const p = products.find((x) => x.id === id) || null;
@@ -39,12 +44,8 @@ export default function App() {
   return (
     <>
       <Topbar currentPage={page} onNavigate={navigate} />
-
       {loading ? (
-        <div className="loading-state">
-          <i className="ti ti-loader" />
-          Загрузка...
-        </div>
+        <div className="loading-state"><i className="ti ti-loader" /> Загрузка...</div>
       ) : (
         <>
           {page === 'home' && <HomePage products={products} onNavigate={navigate} onProductClick={openProduct} />}
@@ -53,9 +54,7 @@ export default function App() {
           {page === 'contact' && <ContactPage products={products} preselectedProduct={preselected} />}
         </>
       )}
-
       <Footer onNavigate={navigate} />
-
       {modalProduct && (
         <ProductModal product={modalProduct} onClose={() => setModalProduct(null)} onOrder={orderFromModal} />
       )}
