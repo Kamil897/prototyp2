@@ -29,7 +29,6 @@ const EMPTY: Omit<AdminProduct, 'id'> = {
 };
 
 const CAT_OPTIONS = ['board', 'beam', 'batten', 'finishing'];
-const CLS_OPTIONS = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6'];
 const STATUS_COLORS: Record<string, string> = {
   new: '#C9974A', processing: '#4A90C9', done: '#4AC974',
 };
