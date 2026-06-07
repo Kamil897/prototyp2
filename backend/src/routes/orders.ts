@@ -39,3 +39,13 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 export default router;
+
+router.delete('/:id', (req: Request, res: Response) => {
+  const token = req.headers['x-admin-token'];
+  if (token !== process.env.ADMIN_PASSWORD) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  prisma.order.delete({ where: { id: req.params.id } })
+    .then(() => res.json({ success: true }))
+    .catch(() => res.status(500).json({ error: 'DB error' }));
+});

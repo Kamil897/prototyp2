@@ -75,3 +75,12 @@ export async function adminUpdateOrderStatus(password: string, id: string, statu
   if (!res.ok) throw new Error('Failed');
   return res.json();
 }
+
+export async function adminDeleteOrder(password: string, id: string) {
+  const res = await fetch(`${BASE}/orders/${id}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json', 'x-admin-token': password },
+  });
+  if (!res.ok) throw new Error('Failed');
+  return res.json();
+}
