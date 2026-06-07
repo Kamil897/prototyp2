@@ -14,7 +14,7 @@ export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const [preselected, setPreselected] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(() => window.location.hash === '#admin');
   const { products, loading } = useProducts();
 
   useEffect(() => {
