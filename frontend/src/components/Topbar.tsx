@@ -48,16 +48,16 @@ export function Topbar({ currentPage, onNavigate }: Props) {
 
         <div className="topbar-right">
           <div className="lang-switch">
-            {(['ru', 'uz', 'en'] as Lang[]).map((l) => (
-              <button
-                key={l}
-                className={`lbtn${lang === l ? ' on' : ''}`}
-                onClick={() => setLang(l)}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
+          <select
+            className="lang-select"
+            value={lang}
+            onChange={(e) => setLang(e.target.value as Lang)}
+          >
+            <option value="ru">RU</option>
+            <option value="uz">UZ</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
           <button className="theme-btn" onClick={toggleTheme} aria-label="Тема">
             <i className={isLight ? 'ti ti-moon' : 'ti ti-sun'} />
           </button>

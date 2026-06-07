@@ -53,14 +53,25 @@ nav { display: flex; align-items: center; flex: 1; justify-content: center; gap:
 .nav-item.on { color: var(--gold); }
 .nav-item.on::after { content: ''; position: absolute; bottom: -1px; left: 14px; right: 14px; height: 1px; background: var(--gold); }
 .topbar-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.lang-switch { display: flex; border: 1px solid var(--brd); overflow: hidden; }
-.lbtn {
-  background: none; border: none; color: var(--txt3);
-  font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.8px; font-weight: 500;
-  padding: 5px 9px; cursor: pointer; transition: all .15s;
+.lang-switch { position: relative; display: inline-flex; align-items: center; }
+.lang-switch::after {
+  content: ''; position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%); pointer-events: none; transition: transform 0.2s;
+  width: 0; height: 0;
+  border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 5px solid var(--gold);
 }
-.lbtn.on { background: var(--gold); color: #0D0B08; }
-.lbtn:hover:not(.on) { color: var(--txt2); }
+.lang-switch:focus-within::after { transform: translateY(-50%) rotate(180deg); }
+.lang-select {
+  appearance: none; -webkit-appearance: none;
+  background: var(--bg2); border: 1px solid var(--gold3); border-radius: 8px;
+  padding: 7px 30px 7px 12px; font-size: 12px; font-weight: 600;
+  font-family: 'DM Sans', sans-serif; color: var(--gold2);
+  cursor: pointer; outline: none; letter-spacing: 0.05em; transition: border-color .15s;
+}
+.lang-select:hover { background: var(--bg3); border-color: var(--gold); }
+.lang-select:focus { border-color: var(--gold2); box-shadow: 0 0 0 3px rgba(201,151,74,0.18); }
+.lang-select option { background: var(--bg2); color: var(--gold2); }
 .burger {
   display: none;
   background: var(--bg3); border: 1.5px solid var(--gold3); color: var(--txt);
@@ -161,7 +172,6 @@ nav { display: flex; align-items: center; flex: 1; justify-content: center; gap:
 
 .cat-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1px; background: var(--brd2); }
 .cat-card { background: var(--bg2); cursor: pointer; transition: background .2s, transform .2s; overflow: hidden; position: relative; }
-.cat-card:hover { background: var(--bg3); }
 .cat-card:hover .card-img img { transform: scale(1.04); }
 
 .card-img { height: 180px; overflow: hidden; position: relative; background: var(--bg3); }
