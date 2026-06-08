@@ -65,7 +65,7 @@ export function HomePage({ products, onNavigate, onProductClick }: Props) {
           <div className="sec-rule" />
         </div>
         <div className="cat-grid">
-          {products.slice(0, 4).map((p) => (
+          {products.slice(0, 6).map((p) => (
             <CatalogCard key={p.id} product={p} small onClick={onProductClick} />
           ))}
         </div>
